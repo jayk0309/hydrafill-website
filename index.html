@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HydraFill - Track your daily hydration with a beautiful, realistic body visualization. Premium features unlock all drink types.">
+  <meta name="keywords" content="hydration tracker, water intake, drink tracker, fitness app, wellness">
+  <meta name="theme-color" content="#0A0E27">
+  <title>HydraFill - Hydration Tracking Made Beautiful</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💧</text></svg>">
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:title" content="HydraFill - Hydration Tracking Made Beautiful">
+  <meta property="og:description" content="Watch your body fill with real liquid videos as you log drinks. Stay hydrated, stay healthy.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hydrafill.fit">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+      background: #0A0E27;
+      color: #E0E0E0;
+      line-height: 1.6;
+    }
+
+    a {
+      color: #00D4FF;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    a:hover {
+      color: #7C4DFF;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      background: rgba(10, 14, 39, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-text {
+      background: linear-gradient(135deg, #00D4FF, #7C4DFF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+      align-items: center;
+    }
+
+    nav a {
+      font-size: 14px;
+      color: #B0B0B0;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00D4FF;
+    }
+
+    .cta-btn {
+      background: linear-gradient(135deg, #00D4FF, #7C4DFF);
+      color: #0A0E27 !important;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: transform 0.3s;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 100px 0;
+      text-align: center;
+      background: linear-gradient(135deg, #0A0E27 0%, #0D1B4B 100%);
+    }
+
+    .hero h1 {
+      font-size: 3.5em;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #00D4FF, #7C4DFF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 800;
+    }
+
+    .hero p {
+      font-size: 1.3em;
+      color: #B0B0B0;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 15px 35px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #00D4FF, #7C4DFF);
+      color: #0A0E27;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0, 212, 255, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #00D4FF;
+      border: 1px solid #00D4FF;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0, 212, 255, 0.1);
+    }
+
+    /* Features Section */
+    .features {
+      padding: 80px 0;
+      background: #0F1533;
+    }
+
+    .section-title {
+      font-size: 2.5em;
+      text-align: center;
+      margin-bottom: 60px;
+      color: #00D4FF;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+    }
+
+    .feature-card {
+      background: rgba(0, 212, 255, 0.05);
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover {
+      background: rgba(0, 212, 255, 0.1);
+      border-color: rgba(0, 212, 255, 0.5);
+      transform: translateY(-5px);
+    }
+
+    .feature-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.4em;
+      margin-bottom: 15px;
+      color: #00D4FF;
+    }
+
+    .feature-card p {
+      color: #B0B0B0;
+      line-height: 1.8;
+    }
+
+    /* Pricing Section */
+    .pricing {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #0A0E27 0%, #0D1B4B 100%);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .pricing-card.featured {
+      background: rgba(0, 212, 255, 0.1);
+      border-color: #00D4FF;
+      transform: scale(1.05);
+      box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
+    }
+
+    .pricing-card:hover {
+      border-color: #7C4DFF;
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -15px;
+      left: 20px;
+      background: #7C4DFF;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .plan-name {
+      font-size: 1.5em;
+      color: #00D4FF;
+      margin: 20px 0;
+    }
+
+    .plan-price {
+      font-size: 2.5em;
+      font-weight: 800;
+      color: #00D4FF;
+      margin: 20px 0;
+    }
+
+    .plan-price span {
+      font-size: 0.4em;
+      color: #7C4DFF;
+    }
+
+    .plan-features {
+      list-style: none;
+      margin: 30px 0;
+    }
+
+    .plan-features li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+      color: #B0B0B0;
+    }
+
+    .plan-features li:before {
+      content: "\2713  ";
+      color: #00D4FF;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .plan-features li.disabled {
+      opacity: 0.5;
+    }
+
+    .plan-features li.disabled:before {
+      content: "\25CB  ";
+      color: #666;
+    }
+
+    /* How It Works */
+    .how-it-works {
+      padding: 80px 0;
+      background: #0F1533;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .step {
+      text-align: center;
+    }
+
+    .step-number {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #00D4FF, #7C4DFF);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: bold;
+      color: #0A0E27;
+      margin: 0 auto 20px;
+    }
+
+    .step h3 {
+      color: #00D4FF;
+      margin-bottom: 10px;
+    }
+
+    .step p {
+      color: #B0B0B0;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #0A0E27 0%, #0D1B4B 100%);
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .testimonial {
+      background: rgba(0, 212, 255, 0.05);
+      padding: 30px;
+      border-radius: 12px;
+      border-left: 4px solid #7C4DFF;
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      color: #D0D0D0;
+      margin-bottom: 20px;
+      font-size: 0.95em;
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      color: #00D4FF;
+    }
+
+    .testimonial-role {
+      font-size: 0.85em;
+      color: #7C4DFF;
+    }
+
+    /* Downloads Section */
+    .downloads {
+      padding: 80px 0;
+      background: #0F1533;
+      text-align: center;
+    }
+
+    .download-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+
+    .download-btn {
+      background: rgba(0, 212, 255, 0.1);
+      border: 2px solid #00D4FF;
+      padding: 15px 30px;
+      border-radius: 12px;
+      color: #00D4FF;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .download-btn:hover {
+      background: #00D4FF;
+      color: #0A0E27;
+    }
+
+    /* FAQ */
+    .faq {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #0A0E27 0%, #0D1B4B 100%);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: rgba(0, 212, 255, 0.05);
+      padding: 20px;
+      margin-bottom: 15px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .faq-item:hover {
+      background: rgba(0, 212, 255, 0.1);
+    }
+
+    .faq-question {
+      font-weight: 600;
+      color: #00D4FF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-toggle {
+      color: #00D4FF;
+      transition: transform 0.3s;
+    }
+
+    .faq-item.active .faq-toggle {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      color: #B0B0B0;
+      margin-top: 15px;
+      display: none;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    /* Newsletter */
+    .newsletter {
+      padding: 60px 0;
+      background: rgba(0, 212, 255, 0.1);
+      border-radius: 16px;
+      text-align: center;
+      margin: 60px 0;
+    }
+
+    .newsletter h2 {
+      color: #00D4FF;
+      margin-bottom: 15px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 10px;
+      max-width: 500px;
+      margin: 30px auto 0;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid #00D4FF;
+      border-radius: 8px;
+      color: #E0E0E0;
+      font-size: 14px;
+    }
+
+    .newsletter-form input::placeholder {
+      color: #666;
+    }
+
+    .newsletter-form button {
+      padding: 15px 30px;
+      background: #00D4FF;
+      color: #0A0E27;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .newsletter-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+    }
+
+    /* Footer */
+    footer {
+      background: #050812;
+      padding: 40px 0 20px;
+      border-top: 1px solid rgba(0, 212, 255, 0.1);
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-section h4 {
+      color: #00D4FF;
+      margin-bottom: 20px;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-section a {
+      color: #B0B0B0;
+      transition: color 0.3s;
+    }
+
+    .footer-section a:hover {
+      color: #00D4FF;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(0, 212, 255, 0.1);
+      color: #666;
+      font-size: 0.9em;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2em;
+      }
+      .hero p {
+        font-size: 1em;
+      }
+      .hero-buttons {
+        flex-direction: column;
+      }
+      .hero-buttons .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .pricing-card.featured {
+        transform: scale(1);
+      }
+      /* Keep the Download CTA visible; hide only the text links on phones */
+      nav ul {
+        gap: 14px;
+      }
+      nav ul li.nav-link {
+        display: none;
+      }
+      .newsletter-form {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <span style="font-size: 28px;">💧</span>
+        <span class="logo-text">HydraFill</span>
+      </div>
+      <ul>
+        <li class="nav-link"><a href="#features">Features</a></li>
+        <li class="nav-link"><a href="#pricing">Pricing</a></li>
+        <li class="nav-link"><a href="#faq">FAQ</a></li>
+        <li><a href="#download" class="cta-btn">Download</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Track Your Hydration with Beautiful Visuals</h1>
+      <p>Watch your body fill with real liquid videos as you log drinks throughout the day. Stay hydrated, stay healthy.</p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary" onclick="scrollToSection('#download')">
+          📱 Download App
+        </button>
+        <button class="btn btn-secondary" onclick="scrollToSection('#features')">
+          Learn More ↓
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="container">
+      <h2 class="section-title">Why HydraFill?</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎥</div>
+          <h3>Real Liquid Videos</h3>
+          <p>Watch your body fill with actual videos of water, coffee, tea, juice, and many other drinks as you log your intake.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Smart Analytics</h3>
+          <p>Track weekly and monthly trends, see your hydration patterns, and get insights to stay consistent with your goals.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>Personalized Goals</h3>
+          <p>Your daily hydration goal is calculated based on your weight, activity level, and climate. Adjustable anytime.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏆</div>
+          <h3>Streaks &amp; Achievements</h3>
+          <p>Build daily streaks, earn badges, and stay motivated with achievements that celebrate your consistency.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🥤</div>
+          <h3>Many Drink Types</h3>
+          <p>Water, coffee, tea, juice, smoothies, energy drinks, and more — each with its own realistic video.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>Privacy First</h3>
+          <p>Your data is encrypted and stored securely. We never sell your information or share it with advertisers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works">
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Set Your Goal</h3>
+          <p>Create your account and set your daily hydration goal. We calculate it based on your profile.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Log Drinks</h3>
+          <p>Tap + to add drinks throughout the day. Choose from many drink types with one tap.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Watch Your Body Fill</h3>
+          <p>See real liquid videos fill your body as you log. Reach 100% to complete your daily goal.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Build Your Streak</h3>
+          <p>Hit your goal every day to build a streak. Earn achievements and stay motivated.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <h2 class="section-title">Choose Your Plan</h2>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="plan-name">Free</div>
+          <div class="plan-price">$0</div>
+          <ul class="plan-features">
+            <li>Water, Tea, Black Coffee</li>
+            <li>Daily goals &amp; streaks</li>
+            <li>Basic analytics</li>
+            <li class="disabled">All drink types</li>
+            <li class="disabled">Custom drinks</li>
+            <li class="disabled">Advanced analytics</li>
+          </ul>
+          <a href="#download" class="btn btn-secondary" style="width: 100%; justify-content: center;">Download Free</a>
+        </div>
+
+        <div class="pricing-card featured">
+          <div class="pricing-badge">MOST POPULAR</div>
+          <div class="plan-name">Premium</div>
+          <div class="plan-price">$2.99<span>/month</span></div>
+          <ul class="plan-features">
+            <li>All drink types</li>
+            <li>Custom drinks</li>
+            <li>Advanced analytics</li>
+            <li>Weekly &amp; monthly insights</li>
+            <li>No ads</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="#download" class="btn btn-primary" style="width: 100%; justify-content: center;">Get Premium</a>
+        </div>
+
+        <div class="pricing-card">
+          <div class="plan-name">Premium Yearly</div>
+          <div class="plan-price">$19.99<span>/year</span></div>
+          <ul class="plan-features">
+            <li>All Premium features</li>
+            <li>Save vs monthly</li>
+            <li>Auto-renews yearly</li>
+            <li>Cancel anytime</li>
+          </ul>
+          <a href="#download" class="btn btn-secondary" style="width: 100%; justify-content: center;">Best Value</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title">Loved by Users</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial">
+          <div class="testimonial-text">"HydraFill completely changed my relationship with drinking water. The body visualization is so satisfying!"</div>
+          <div class="testimonial-author">Sarah M.</div>
+          <div class="testimonial-role">Fitness Enthusiast</div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-text">"Finally an app that makes tracking hydration fun. The real drink videos are such a cool idea."</div>
+          <div class="testimonial-author">James K.</div>
+          <div class="testimonial-role">Health Coach</div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-text">"Simple, beautiful, and actually motivates me to drink more water. This is the one I'll actually use."</div>
+          <div class="testimonial-author">Alex P.</div>
+          <div class="testimonial-role">Early Adopter</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+
+      <div class="faq-item" onclick="this.classList.toggle('active')">
+        <div class="faq-question">
+          <span>Is HydraFill a medical device?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">No, HydraFill is a wellness tracking app, not a medical device. It's designed for personal hydration awareness. Always consult a healthcare provider for medical advice about your hydration needs.</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('active')">
+        <div class="faq-question">
+          <span>Can I cancel my subscription anytime?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">Yes! You can cancel anytime from your device's app store subscription settings. Your subscription will continue until the end of the current billing period.</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('active')">
+        <div class="faq-question">
+          <span>How is my data stored?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">Your data is encrypted and stored securely in our Supabase backend. We never sell your data or share it with advertisers. See our <a href="/privacy">Privacy Policy</a> for details.</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('active')">
+        <div class="faq-question">
+          <span>Do you have Android support?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">Yes! HydraFill is available on both iOS (App Store) and Android (Google Play). Download whichever matches your device.</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('active')">
+        <div class="faq-question">
+          <span>Can I sync between devices?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">Yes, sign in with the same account on any device and your data syncs across all your devices.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <div class="container">
+    <section class="newsletter">
+      <div class="container">
+        <h2>Stay Updated</h2>
+        <p>Get tips on hydration and new features delivered to your inbox.</p>
+        <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+          <input type="email" placeholder="your@email.com" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <!-- Downloads Section -->
+  <section class="downloads" id="download">
+    <div class="container">
+      <h2 class="section-title">Download HydraFill Today</h2>
+      <p style="color: #B0B0B0; margin-bottom: 20px;">Available on iOS and Android. Start tracking your hydration for free.</p>
+      <div class="download-buttons">
+        <!-- TODO: replace with your real App Store URL once published -->
+        <a href="https://apps.apple.com/app/hydrafill/idXXXXXXXXXX" class="download-btn" target="_blank" rel="noopener">
+          🍎 App Store
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.hydraflow.app" class="download-btn" target="_blank" rel="noopener">
+          🤖 Google Play
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="mailto:support@hydrafill.fit">Support</a></li>
+            <li><a href="mailto:support@hydrafill.fit">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Download</h4>
+          <ul>
+            <li><a href="https://apps.apple.com/app/hydrafill/idXXXXXXXXXX" target="_blank" rel="noopener">App Store</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.hydraflow.app" target="_blank" rel="noopener">Google Play</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 HydraFill. All rights reserved. | Made with 💧 for your health</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function scrollToSection(selector) {
+      const element = document.querySelector(selector);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function handleNewsletterSubmit(e) {
+      e.preventDefault();
+      const email = e.target.querySelector('input[type="email"]').value;
+      // Placeholder — wire this to your email provider (e.g. Resend, Mailchimp, Supabase table).
+      alert('Thanks for subscribing, ' + email + '! We\'ll be in touch.');
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+# Netlify configuration for HydraFill (hydrafill.fit)
+# When you deploy the `website/` folder, this file is read from the site root.
+# Note: redirects here take precedence over the _redirects file. Both are kept
+# in sync so it works either way.
+
+[build]
+  # The site is plain static HTML; nothing to build. Publish the current folder.
+  publish = "."
+
+# --- Clean URLs: serve the real files at pretty paths (200 = rewrite) ---
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy-policy.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms-of-service.html"
+  status = 200
+
+# --- Redirect .html / long variants to the clean URLs (301 = permanent) ---
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacy-policy.html"
+  to = "/privacy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/privacy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/terms.html"
+  to = "/terms"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/terms-of-service.html"
+  to = "/terms"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/terms-of-service"
+  to = "/terms"
+  status = 301
+  force = true
+
+# --- Security / caching headers (nice for a store-facing legal site) ---
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

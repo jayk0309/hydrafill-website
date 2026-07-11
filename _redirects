@@ -1,0 +1,15 @@
+# Netlify redirects / rewrites for HydraFill
+# Format:  from   to   status
+# 200 = rewrite (URL stays clean), 301 = permanent redirect, ! = force even if a file exists
+
+# Clean URLs -> actual files (content served, address bar stays clean)
+/privacy      /privacy-policy.html      200
+/terms        /terms-of-service.html    200
+
+# Send any .html variants to the clean URL (permanent redirect)
+/privacy.html            /privacy    301!
+/privacy-policy.html     /privacy    301!
+/privacy-policy          /privacy    301!
+/terms.html              /terms      301!
+/terms-of-service.html   /terms      301!
+/terms-of-service        /terms      301!

@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.hydraflow.app",
+      "sha256_cert_fingerprints": [
+        "5B:2F:51:6B:73:22:DB:E6:AF:5C:75:DA:88:49:83:83:27:1A:AB:23:02:66:80:10:D1:38:BD:76:81:86:6A:F6"
+      ]
+    }
+  }
+]
